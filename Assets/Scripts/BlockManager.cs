@@ -6,6 +6,12 @@ public class BlockManager : MonoBehaviour
     [SerializeField]
     private List<GameObject> _blockPrefabs;
 
+    private List<GameObject> _spawnedBlocks = new List<GameObject>();
+
+    //private float _currentHeight = 0f;
+
+    private float CurrentHeight { get; } = 0f;
+
     public GameObject GetNewBlock()
     {
         GameObject newBlock = new GameObject();
