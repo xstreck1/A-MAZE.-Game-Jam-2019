@@ -5,20 +5,25 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     private float ROTATION_SPEED = 1f;
+    private float currentHeight = 10f;
 
     Block CurrentBlock { get; set; }
 
-    public void GiveBlock(Block block)
+    public void GiveBlock(Block block, float newHeight)
     {
         CurrentBlock = block;
+        currentHeight = newHeight;
     }
 
-    public void ReleaseBlock()
+    public Block ReleaseBlock()
     {
+        var block = CurrentBlock;
         if (!CurrentBlock) 
-            return;
+            return null;
+        
         CurrentBlock.GetComponent<Rigidbody>().isKinematic = false;
         CurrentBlock = null;
+        return block;
     }
 
     // Update is called once per frame
@@ -33,7 +38,7 @@ public class InputManager : MonoBehaviour
         var mousePosition = Input.mousePosition;
         mousePosition.z = RotateCamera.Depth;
         var screenPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        screenPosition.y = 10f;
+        screenPosition.y = currentHeight;
         blockTransform.position = screenPosition;
 
         // Rotation

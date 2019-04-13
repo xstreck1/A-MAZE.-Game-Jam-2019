@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] private Text height;
+    
     private BlockSpawner _blockManager;
     private InputManager _inputManager;
 
     private List<Block> _spawnedBlocks = new List<Block>();
 
     private float CurrentHeight { get; } = 0f;
+
+    private float HEIGHT_OFFSET = 5f;
 
     private float SPAWN_TIMER = 5f;
 
@@ -21,11 +26,15 @@ public class GameController : MonoBehaviour
     }
 
     private void Update()
-    {// Let go
-        if (!Input.GetKey(KeyCode.Space)) 
+    {
+        height.text = GetTotalHeight().ToString();
+        
+        // Let go
+        if (!Input.GetKeyDown(KeyCode.Space)) 
             return;
         
-        _inputManager.ReleaseBlock();
+        var block = _inputManager.ReleaseBlock();
+        _spawnedBlocks.Add(block);
         SpawnBlock(SPAWN_TIMER);
     }
 
@@ -37,8 +46,21 @@ public class GameController : MonoBehaviour
     private IEnumerator SpawnCoRoutine(float timer)
     {
         yield return new WaitForSeconds(timer);
+        var height = GetTotalHeight();
         var block = _blockManager.GetNewBlock();
-        _inputManager.GiveBlock(block);
+        _inputManager.GiveBlock(block, height + HEIGHT_OFFSET);
         yield return null;
+    }
+
+    private float GetTotalHeight()
+    {
+        float totalHeight = 0f;
+        
+        foreach (var block in _spawnedBlocks)
+        {
+            totalHeight = Mathf.Max(totalHeight, block.GetHeight());
+        }
+
+        return totalHeight;
     }
 }
