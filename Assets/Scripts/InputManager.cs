@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    [SerializeField] private Camera fakeCamera;
+    
     public delegate void BlockReleasedEventHandler(Block block);
 
     public event BlockReleasedEventHandler BlockReleased;
@@ -37,20 +39,20 @@ public class InputManager : MonoBehaviour
         // Movement
         var mousePosition = Input.mousePosition;
         mousePosition.z = RotateCamera.Depth;
-        var screenPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        var screenPosition = fakeCamera.ScreenToWorldPoint(mousePosition);
         screenPosition.y = currentHeight;
         blockTransform.position = screenPosition;
 
         // Rotation
         if (Input.GetMouseButton(0))
         {
-            blockTransform.RotateAround(blockTransform.position, RotateCamera.Singleton.transform.forward,
+            blockTransform.RotateAround(blockTransform.position, fakeCamera.transform.forward,
                 Time.deltaTime * 90f * ROTATION_SPEED);
         }
 
         if (Input.GetMouseButton(1))
         {
-            blockTransform.RotateAround(blockTransform.position, RotateCamera.Singleton.transform.forward,
+            blockTransform.RotateAround(blockTransform.position, fakeCamera.transform.forward,
                 Time.deltaTime * -90f * ROTATION_SPEED);
         }
 
