@@ -5,40 +5,39 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private Text height;
+    [SerializeField] private Text heightText;
     
     private BlockSpawner _blockManager;
     private InputManager _inputManager;
 
     private List<Block> _spawnedBlocks = new List<Block>();
 
-    private float CurrentHeight { get; } = 0f;
-
     private float HEIGHT_OFFSET = 5f;
 
-    private float SPAWN_TIMER = 5f;
+    public float SpawnInterval = 3f;
 
     private void Start()
     {
         _blockManager = FindObjectOfType<BlockSpawner>();
         _inputManager = FindObjectOfType<InputManager>();
-        SpawnBlock(0f);
+        _inputManager.BlockReleased += OnBlockReleased;
+
+        SpawnNewBlock(0f);
     }
+
 
     private void Update()
     {
-        height.text = GetTotalHeight().ToString();
-        
-        // Let go
-        if (!Input.GetKeyDown(KeyCode.Space)) 
-            return;
-        
-        var block = _inputManager.ReleaseBlock();
-        _spawnedBlocks.Add(block);
-        SpawnBlock(SPAWN_TIMER);
+        heightText.text = GetTotalHeight().ToString();
     }
 
-    private void SpawnBlock(float time)
+    private void OnBlockReleased(Block block)
+    {
+        _spawnedBlocks.Add(block);
+        SpawnNewBlock(SpawnInterval);
+    }
+
+    private void SpawnNewBlock(float time)
     {
         StartCoroutine(SpawnCoRoutine(time));
     }
@@ -46,10 +45,15 @@ public class GameController : MonoBehaviour
     private IEnumerator SpawnCoRoutine(float timer)
     {
         yield return new WaitForSeconds(timer);
-        var height = GetTotalHeight();
+
+
+        GiveBlockToInputManager();
+    }
+
+    private void GiveBlockToInputManager()
+    {
         var block = _blockManager.GetNewBlock();
-        _inputManager.GiveBlock(block, height + HEIGHT_OFFSET);
-        yield return null;
+        _inputManager.GiveBlock(block, GetTotalHeight() + HEIGHT_OFFSET);
     }
 
     private float GetTotalHeight()

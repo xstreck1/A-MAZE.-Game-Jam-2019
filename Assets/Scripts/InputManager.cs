@@ -4,10 +4,14 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public delegate void BlockReleasedEventHandler(Block block);
+
+    public event BlockReleasedEventHandler BlockReleased;
+
     private float ROTATION_SPEED = 1f;
     private float currentHeight = 10f;
 
-    Block CurrentBlock { get; set; }
+    public Block CurrentBlock { get; set; }
 
     public void GiveBlock(Block block, float newHeight)
     {
@@ -15,15 +19,11 @@ public class InputManager : MonoBehaviour
         currentHeight = newHeight;
     }
 
-    public Block ReleaseBlock()
+    public void ReleaseBlock()
     {
-        var block = CurrentBlock;
-        if (!CurrentBlock) 
-            return null;
-        
         CurrentBlock.GetComponent<Rigidbody>().isKinematic = false;
+        BlockReleased?.Invoke(CurrentBlock);
         CurrentBlock = null;
-        return block;
     }
 
     // Update is called once per frame
@@ -52,6 +52,11 @@ public class InputManager : MonoBehaviour
         {
             blockTransform.RotateAround(blockTransform.position, RotateCamera.Singleton.transform.forward,
                 Time.deltaTime * -90f * ROTATION_SPEED);
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            ReleaseBlock();
         }
     }
 }
