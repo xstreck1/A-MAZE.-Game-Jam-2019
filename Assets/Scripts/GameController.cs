@@ -42,6 +42,7 @@ public class GameController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("GameOver");
         GameIsOver = true;
         DisplayGameOverText();
     }
