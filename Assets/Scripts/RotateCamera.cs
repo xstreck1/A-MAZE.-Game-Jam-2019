@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Rendering;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class RotateCamera : MonoBehaviour
 {
@@ -12,14 +9,14 @@ public class RotateCamera : MonoBehaviour
     public static float Depth { get; private set; }
 
     // Start is called before the first frame update
-    void Awake()
+    private void Awake()
     {
         Singleton = this;
         Depth = Mathf.Abs(transform.position.z);
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKey((KeyCode.A)))
         {
