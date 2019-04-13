@@ -51,13 +51,13 @@ public class InputManager : MonoBehaviour
         // Rotation
         if (Input.GetMouseButton(0))
         {
-            blockTransform.RotateAround(blockTransform.position, fakeCamera.transform.up,
+            blockTransform.RotateAround(blockTransform.position, fakeCamera.transform.forward,
                 Time.deltaTime * 90f * ROTATION_SPEED);
         }
 
         if (Input.GetMouseButton(1))
         {
-            blockTransform.RotateAround(blockTransform.position, fakeCamera.transform.up,
+            blockTransform.RotateAround(blockTransform.position, fakeCamera.transform.forward,
                 Time.deltaTime * -90f * ROTATION_SPEED);
         }
 
