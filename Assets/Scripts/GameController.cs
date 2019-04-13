@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    private BlockManager _blockManager;
+    private BlockSpawner _blockManager;
 
     private List<Block> _spawnedBlocks = new List<Block>();
 
+    private float CurrentHeight { get; } = 0f;
+
     private void Start()
     {
-        _blockManager = FindObjectOfType<BlockManager>();
+        _blockManager = FindObjectOfType<BlockSpawner>();
     }
 
     private void Update()
