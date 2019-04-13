@@ -1,18 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public float Weight
     {
-        
+        get { return _weight; }
+        set { _weight = value; }
     }
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    private float _weight;
+
+    public float GetHeight()
     {
-        
+        Renderer renderer = GetComponent<Renderer>();
+        float height = renderer.bounds.max.y;
+
+        return height;
+    }
+
+    private void Update()
+    {
+        Debug.Log("Height = " + GetHeight().ToString());
     }
 }
