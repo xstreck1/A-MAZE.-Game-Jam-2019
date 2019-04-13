@@ -28,7 +28,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        heightText.text = GetTotalHeight().ToString();
+        heightText.text = GetTotalHeight().ToString("0.00");
     }
 
     private void OnBlockReleased(Block block)
