@@ -4,18 +4,22 @@ public class Block : MonoBehaviour
 {
     public float Weight
     {
-        get { return _weight; }
-        set { _weight = value; }
+        get => _weight;
+        set => _weight = value;
     }
-
+    
     [SerializeField]
     private float _weight;
 
-    public float GetHeight()
-    {
-        Renderer renderer = GetComponent<Renderer>();
-        float height = renderer.bounds.max.y;
+    public Vector3 Center { get; private set; }
 
-        return height;
+    private Renderer _renderer;
+    
+    private void Awake()
+    {
+        _renderer = GetComponent<Renderer>();
+        Center = _renderer.bounds.center;
     }
+
+    public float GetHeight() => _renderer.bounds.max.y;
 }

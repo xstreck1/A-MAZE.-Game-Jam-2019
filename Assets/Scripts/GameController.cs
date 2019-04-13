@@ -13,7 +13,7 @@ public class GameController : MonoBehaviour
 
     private List<Block> _spawnedBlocks = new List<Block>();
 
-    private float HEIGHT_OFFSET = 5f;
+    [SerializeField] private float HEIGHT_OFFSET = 5f;
 
     public float SpawnInterval = 3f;
 
