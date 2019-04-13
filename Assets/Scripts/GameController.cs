@@ -49,7 +49,7 @@ public class GameController : MonoBehaviour
 
     private void DisplayGameOverText()
     {
-        GameOverText.text = "Your tower reached a height of " + GetTotalHeight().ToString("0.00");
+        GameOverText.text = "GAME OVER \nYour tower reached a height of " + GetTotalHeight().ToString("0.00");
     }
 
     private void SpawnNewBlock(float time)
