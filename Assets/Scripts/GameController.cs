@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     private BlockSpawner _blockManager;
+    private InputManager _inputManager;
 
     private List<Block> _spawnedBlocks = new List<Block>();
 
@@ -12,6 +13,10 @@ public class GameController : MonoBehaviour
     private void Start()
     {
         _blockManager = FindObjectOfType<BlockSpawner>();
+        _inputManager = FindObjectOfType<InputManager>();
+
+        var block = _blockManager.GetNewBlock();
+        _inputManager.GiveBlock(block);
     }
 
     private void Update()

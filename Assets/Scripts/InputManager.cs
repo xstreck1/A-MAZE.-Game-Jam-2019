@@ -19,23 +19,25 @@ public class InputManager : MonoBehaviour
         if (!CurrentBlock)
             return;
 
+        var blockTransform = CurrentBlock.transform;
+
         // Movement
         var mousePosition = Input.mousePosition;
         mousePosition.z = RotateCamera.Depth;
         var screenPosition = Camera.main.ScreenToWorldPoint(mousePosition);
         screenPosition.y = 4f;
-        transform.position = screenPosition;
+        blockTransform.position = screenPosition;
 
         // Rotation
         if (Input.GetMouseButton(0))
         {
-            transform.RotateAround(transform.position, RotateCamera.Singleton.transform.forward,
+            blockTransform.RotateAround(blockTransform.position, RotateCamera.Singleton.transform.forward,
                 Time.deltaTime * 90f * ROTATION_SPEED);
         }
 
         if (Input.GetMouseButton(1))
         {
-            transform.RotateAround(transform.position, RotateCamera.Singleton.transform.forward,
+            blockTransform.RotateAround(blockTransform.position, RotateCamera.Singleton.transform.forward,
                 Time.deltaTime * -90f * ROTATION_SPEED);
         }
 

@@ -25,19 +25,21 @@ public class BlockSpawner : MonoBehaviour
     {
         float random = Random.Range(0f, 1f);
         float weightSum = 0f;
-        Block newBlock = null;
+        Block blockPrefab = null;
 
         for (int i = 0; i < _blockPrefabs.Count; ++i)
         {
             weightSum += _blockPrefabs[i].Weight;
             if (random > weightSum)
             {
-                newBlock = _blockPrefabs[i].GetComponent<Block>();
+                blockPrefab = _blockPrefabs[i].GetComponent<Block>();
                 break;
             }
         }
 
-        newBlock = _blockPrefabs[_blockPrefabs.Count - 1];
+        blockPrefab = _blockPrefabs[_blockPrefabs.Count - 1];
+
+        var newBlock = Instantiate(blockPrefab);
 
         return newBlock;
     }
