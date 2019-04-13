@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
 
     public float SpawnInterval = 3f;
 
-    private bool _gameOver = false;
+    public bool GameIsOver = false;
 
     private void Start()
     {
@@ -42,7 +42,7 @@ public class GameController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        _gameOver = true;
+        GameIsOver = true;
         DisplayGameOverText();
     }
 
@@ -65,7 +65,7 @@ public class GameController : MonoBehaviour
 
     private void GiveBlockToInputManager()
     {
-        if (_gameOver) { return; }
+        if (GameIsOver) { return; }
 
         var block = _blockManager.GetNewBlock();
         _inputManager.GiveBlock(block, GetTotalHeight() + HEIGHT_OFFSET);

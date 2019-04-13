@@ -5,13 +5,14 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     [SerializeField] private Camera fakeCamera;
-    
+
     public delegate void BlockReleasedEventHandler(Block block);
 
     public event BlockReleasedEventHandler BlockReleased;
 
     private float ROTATION_SPEED = 1f;
     private float currentHeight = 10f;
+    private GameController _gameController;
 
     public Block CurrentBlock { get; set; }
 
@@ -28,10 +29,14 @@ public class InputManager : MonoBehaviour
         CurrentBlock = null;
     }
 
-    // Update is called once per frame
+    private void Start()
+    {
+        _gameController = GameObject.FindObjectOfType<GameController>();
+    }
+
     private void Update()
     {
-        if (!CurrentBlock)
+        if (!CurrentBlock || _gameController.GameIsOver)
             return;
 
         var blockTransform = CurrentBlock.transform;
