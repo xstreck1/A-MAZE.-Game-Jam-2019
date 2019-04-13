@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveBlock : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
     private float ROTATION_SPEED = 1f;
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         // 
         var mousePosition = Input.mousePosition;
