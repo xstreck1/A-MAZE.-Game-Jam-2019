@@ -9,6 +9,9 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /Assets/Plugins*
+/Assets/Standard\ Assets*
+/Assets/SampleScenes*
+
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
