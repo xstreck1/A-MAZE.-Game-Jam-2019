@@ -13,6 +13,12 @@ public class InputManager : MonoBehaviour
         CurrentBlock = block;
     }
 
+    public void ReleaseBlock()
+    {
+        CurrentBlock.GetComponent<Rigidbody>().isKinematic = false;
+        CurrentBlock = null;
+    }
+
     // Update is called once per frame
     private void Update()
     {
@@ -25,7 +31,7 @@ public class InputManager : MonoBehaviour
         var mousePosition = Input.mousePosition;
         mousePosition.z = RotateCamera.Depth;
         var screenPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        screenPosition.y = 4f;
+        screenPosition.y = 10f;
         blockTransform.position = screenPosition;
 
         // Rotation
@@ -39,13 +45,6 @@ public class InputManager : MonoBehaviour
         {
             blockTransform.RotateAround(blockTransform.position, RotateCamera.Singleton.transform.forward,
                 Time.deltaTime * -90f * ROTATION_SPEED);
-        }
-
-        // Let go
-        if (Input.GetKey(KeyCode.Space))
-        {
-            GetComponent<Rigidbody>().isKinematic = false;
-            CurrentBlock = null;
         }
     }
 }

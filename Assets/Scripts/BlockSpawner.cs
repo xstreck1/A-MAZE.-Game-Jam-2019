@@ -10,14 +10,14 @@ public class BlockSpawner : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < _blockPrefabs.Count; ++i)
+        foreach (var t in _blockPrefabs)
         {
-            _combinedWeight += _blockPrefabs[i].Weight;
+            _combinedWeight += t.Weight;
         }
 
-        for (int i = 0; i < _blockPrefabs.Count; ++i)
+        foreach (var t in _blockPrefabs)
         {
-            _blockPrefabs[i].Weight = _blockPrefabs[i].Weight / _combinedWeight;
+            t.Weight = t.Weight / _combinedWeight;
         }
     }
 
@@ -27,12 +27,13 @@ public class BlockSpawner : MonoBehaviour
         float weightSum = 0f;
         Block blockPrefab = null;
 
-        for (int i = 0; i < _blockPrefabs.Count; ++i)
+        foreach (var t in _blockPrefabs)
         {
-            weightSum += _blockPrefabs[i].Weight;
-            if (random > weightSum)
+            weightSum += t.Weight;
+            
+            if (random <= weightSum)
             {
-                blockPrefab = _blockPrefabs[i].GetComponent<Block>();
+                blockPrefab = t.GetComponent<Block>();
                 break;
             }
         }
@@ -42,7 +43,8 @@ public class BlockSpawner : MonoBehaviour
             blockPrefab = _blockPrefabs[_blockPrefabs.Count - 1];
         }
 
-        var newBlock = Instantiate(blockPrefab);
+        // Spawn outside of existing block
+        var newBlock = Instantiate(blockPrefab, Vector3.up * 1000f, Quaternion.identity);
 
         return newBlock;
     }
