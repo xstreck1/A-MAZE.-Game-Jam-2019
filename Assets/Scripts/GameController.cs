@@ -11,25 +11,23 @@ public class GameController : MonoBehaviour
 
     private float CurrentHeight { get; } = 0f;
 
-    private float SPAWN_TIMER = 5f;
+    public float SpawnInterval = 3f;
 
     private void Start()
     {
         _blockManager = FindObjectOfType<BlockSpawner>();
         _inputManager = FindObjectOfType<InputManager>();
-        SpawnBlock(0f);
+        _inputManager.BlockReleased += OnBlockReleased;
+
+        SpawnNewBlock(0f);
     }
 
-    private void Update()
-    {// Let go
-        if (!Input.GetKey(KeyCode.Space)) 
-            return;
-        
-        _inputManager.ReleaseBlock();
-        SpawnBlock(SPAWN_TIMER);
+    private void OnBlockReleased()
+    {
+        SpawnNewBlock(SpawnInterval);
     }
 
-    private void SpawnBlock(float time)
+    private void SpawnNewBlock(float time)
     {
         StartCoroutine(SpawnCoRoutine(time));
     }
@@ -37,8 +35,13 @@ public class GameController : MonoBehaviour
     private IEnumerator SpawnCoRoutine(float timer)
     {
         yield return new WaitForSeconds(timer);
+
+        GiveBlockToInputManager();
+    }
+
+    private void GiveBlockToInputManager()
+    {
         var block = _blockManager.GetNewBlock();
         _inputManager.GiveBlock(block);
-        yield return null;
     }
 }

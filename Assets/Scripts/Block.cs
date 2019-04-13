@@ -18,9 +18,4 @@ public class Block : MonoBehaviour
 
         return height;
     }
-
-    private void Update()
-    {
-        Debug.Log("Height = " + GetHeight().ToString());
-    }
 }

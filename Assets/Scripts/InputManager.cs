@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
+    public delegate void BlockReleasedEventHandler();
+
+    public event BlockReleasedEventHandler BlockReleased;
+
     private float ROTATION_SPEED = 1f;
 
-    Block CurrentBlock { get; set; }
+    public Block CurrentBlock { get; set; }
 
     public void GiveBlock(Block block)
     {
@@ -15,10 +19,9 @@ public class InputManager : MonoBehaviour
 
     public void ReleaseBlock()
     {
-        if (!CurrentBlock) 
-            return;
         CurrentBlock.GetComponent<Rigidbody>().isKinematic = false;
         CurrentBlock = null;
+        BlockReleased?.Invoke();
     }
 
     // Update is called once per frame
@@ -47,6 +50,11 @@ public class InputManager : MonoBehaviour
         {
             blockTransform.RotateAround(blockTransform.position, RotateCamera.Singleton.transform.forward,
                 Time.deltaTime * -90f * ROTATION_SPEED);
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            ReleaseBlock();
         }
     }
 }
