@@ -15,6 +15,8 @@ public class InputManager : MonoBehaviour
 
     public void ReleaseBlock()
     {
+        if (!CurrentBlock) 
+            return;
         CurrentBlock.GetComponent<Rigidbody>().isKinematic = false;
         CurrentBlock = null;
     }
