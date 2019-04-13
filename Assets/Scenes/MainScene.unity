@@ -318,7 +318,7 @@ PrefabInstance:
     - target: {fileID: 399271801215369397, guid: d2a03756747eddc4a928b6ecaee0d1c3,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.08
       objectReference: {fileID: 0}
     - target: {fileID: 399271801215369397, guid: d2a03756747eddc4a928b6ecaee0d1c3,
         type: 3}
@@ -474,6 +474,11 @@ MonoBehaviour:
   - {fileID: 1957287106, guid: f5f6080730ab48b4190265d3a78a4689, type: 3}
   - {fileID: 492401607, guid: 7801032a5fa631e42b1ecd0fd1b252c0, type: 3}
   - {fileID: 1548475651, guid: bb9ab894bbf8f9949b36027da2a39eed, type: 3}
+  - {fileID: 5746549733347209761, guid: 61d5d6f8d14cada41be3a7a402c214db, type: 3}
+  - {fileID: 2238480271133019046, guid: 018a73c1c52af6e4fa0e3f964ae16879, type: 3}
+  - {fileID: 6566379111754556242, guid: bdedb4379ffdd1a47be6c8a146b7716d, type: 3}
+  - {fileID: 6331234141163972359, guid: a8caa933acab8e948852f9876ef14900, type: 3}
+  - {fileID: 3913637157883721863, guid: 525fb2c45d2737440aa1d38bba326177, type: 3}
 --- !u!1 &1122870809
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,11 +698,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 2009315974051584530, guid: a8f0995c8ec2e3546bf0ba8a1730954d,
-        type: 3}
-      propertyPath: m_Text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6545566103471875906, guid: a8f0995c8ec2e3546bf0ba8a1730954d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -802,6 +802,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2009315974051584530, guid: a8f0995c8ec2e3546bf0ba8a1730954d,
+        type: 3}
+      propertyPath: m_Text
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8f0995c8ec2e3546bf0ba8a1730954d, type: 3}
