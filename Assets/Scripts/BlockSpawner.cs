@@ -37,7 +37,10 @@ public class BlockSpawner : MonoBehaviour
             }
         }
 
-        blockPrefab = _blockPrefabs[_blockPrefabs.Count - 1];
+        if (blockPrefab == null)
+        {
+            blockPrefab = _blockPrefabs[_blockPrefabs.Count - 1];
+        }
 
         var newBlock = Instantiate(blockPrefab);
 
