@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private Text heightText;
-    
+    [SerializeField] private BoxCollider WaterCollider;
+
     private BlockSpawner _blockManager;
     private InputManager _inputManager;
 
@@ -24,7 +25,6 @@ public class GameController : MonoBehaviour
 
         SpawnNewBlock(0f);
     }
-
 
     private void Update()
     {
@@ -46,7 +46,6 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
 
-
         GiveBlockToInputManager();
     }
 
@@ -59,7 +58,7 @@ public class GameController : MonoBehaviour
     private float GetTotalHeight()
     {
         float totalHeight = 0f;
-        
+
         foreach (var block in _spawnedBlocks)
         {
             totalHeight = Mathf.Max(totalHeight, block.GetHeight());
